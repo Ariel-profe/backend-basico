@@ -3,7 +3,7 @@ const { Router } = require('express');//desestructuramos una funcion q viene del
 const {check} = require('express-validator');
 
 
-const {validarCampos, validarJWT, adminRole, tieneRole} = require('../middlewares');
+const {validarCampos, validarJWT, tieneRole} = require('../middlewares');
 
 const {RoleValido, existeEmail,existeUsuarioPorId} = require('../helpers/db-validators');
 const { usuariosGet, usuariosPut, usuariosPost, usuariosDelete, usuariosPatch } = require('../controllers/usuarios');
