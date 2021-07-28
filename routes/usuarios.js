@@ -1,9 +1,11 @@
 
 const { Router } = require('express');//desestructuramos una funcion q viene del paquete express
 const {check} = require('express-validator');
-const {validarCampos} = require('../middlewares/validar-campos');
-const {RoleValido, existeEmail,existeUsuarioPorId} = require('../helpers/db-validators');
 
+
+const {validarCampos, validarJWT, adminRole, tieneRole} = require('../middlewares');
+
+const {RoleValido, existeEmail,existeUsuarioPorId} = require('../helpers/db-validators');
 const { usuariosGet, usuariosPut, usuariosPost, usuariosDelete, usuariosPatch } = require('../controllers/usuarios');
 
 const router = Router();
@@ -31,6 +33,9 @@ router.put('/:id', [
 router.patch('/', usuariosPatch);
   
 router.delete('/:id',[
+  validarJWT,
+  // adminRole,
+  tieneRole('ADMIN_ROLE', 'VENTAS_ROLE'),
   check('id', 'No es un ID válido').isMongoId(),
   check('id').custom(existeUsuarioPorId),
   validarCampos

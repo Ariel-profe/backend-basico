@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
-const { collection } = require('../models/usuario');
+
 
 const database = async()=>{
-
+    
     try {
         
         await mongoose.connect( process.env.MONGODB_CNN, {
@@ -20,14 +20,7 @@ const database = async()=>{
         console.log(error);
         throw new Error('Failed to try connect the database');
     }
-
-
-
 };
-
-
-
-
 
 
 module.exports = {

@@ -10,7 +10,7 @@ class Server {
     this.app = express();
     this.port = process.env.PORT;
     this.usuariosPath = "/api/usuarios";
-
+    this.authPath     = "/api/auth";
     //Conectar a la base de datos
     this.conectarDB();
     //Middlewares (funciones q añaden funcionalidad al WebServer se ejecuta siempre q levantemos el servidor
@@ -35,6 +35,7 @@ class Server {
   }
 
   routes() {
+    this.app.use(this.authPath, require("../routes/auth"));
     this.app.use(this.usuariosPath, require("../routes/usuarios")); //es un middleware condicional, cuando pase por esa ruta q haga la peticion
   }
 
